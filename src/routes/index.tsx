@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, Mail, FileText, ListTodo, FlaskConical, MessageSquare, BookOpenText, ShieldCheck, Zap, BarChart3, Star } from "lucide-react";
+import { BrandMark } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -52,9 +53,7 @@ function Landing() {
       <header className="sticky top-0 z-50 border-b border-border/40 bg-background/70 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <Link to="/" className="flex items-center gap-2">
-            <div className="grid size-9 place-items-center rounded-xl bg-gradient-primary shadow-soft">
-              <Sparkles className="size-5 text-white" />
-            </div>
+            <BrandMark className="size-9" />
             <span className="text-base font-bold">WorkFlow AI Pro</span>
           </Link>
           <nav className="hidden items-center gap-6 text-sm md:flex">

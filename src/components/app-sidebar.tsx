@@ -11,7 +11,7 @@ import {
   BarChart3,
   Settings as SettingsIcon,
   ShieldCheck,
-  Sparkles,
+  
   LogOut,
   Moon,
   Sun,
@@ -31,6 +31,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme";
 import { useAuth } from "@/lib/auth";
+import { BrandMark } from "@/components/brand-logo";
 
 const items = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
@@ -60,9 +61,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <Link to="/dashboard" className="flex items-center gap-2 px-2 py-2">
-          <div className="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-primary shadow-soft">
-            <Sparkles className="size-5 text-white" />
-          </div>
+          <BrandMark className="size-9 shrink-0" />
           <div className="flex min-w-0 flex-col group-data-[collapsible=icon]:hidden">
             <span className="truncate text-sm font-bold">WorkFlow AI Pro</span>
             <span className="truncate text-[10px] text-muted-foreground">Productivity Assistant</span>

@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { createChat, listChats } from "@/lib/ai.functions";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, Sparkles, Plus } from "lucide-react";
+import { Loader2, Plus } from "lucide-react";
+import { BrandMark } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/chat/")({
@@ -33,9 +34,7 @@ function ChatIndex() {
   return (
     <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center p-6">
       <div className="max-w-md text-center">
-        <div className="mx-auto grid size-16 place-items-center rounded-2xl bg-gradient-primary shadow-elegant">
-          <Sparkles className="size-8 text-white" />
-        </div>
+        <BrandMark className="mx-auto size-16" />
         <h2 className="mt-6 text-2xl font-bold">Workplace AI Chat</h2>
         <p className="mt-2 text-muted-foreground">
           Your persistent AI co-pilot for any workplace task. Ask, draft, research, plan.
