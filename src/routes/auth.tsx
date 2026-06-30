@@ -72,16 +72,16 @@ function AuthPage() {
     }
   };
 
-  const handleGoogle = async () => {
+  const handleOAuth = async (provider: "google" | "apple") => {
     setBusy(true);
     try {
-      const result = await lovable.auth.signInWithOAuth("google", {
+      const result = await lovable.auth.signInWithOAuth(provider, {
         redirect_uri: window.location.origin,
       });
       if (result.error) throw result.error;
       if (!result.redirected) nav({ to: "/dashboard" });
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Google sign-in failed");
+      toast.error(err instanceof Error ? err.message : `${provider} sign-in failed`);
       setBusy(false);
     }
   };
