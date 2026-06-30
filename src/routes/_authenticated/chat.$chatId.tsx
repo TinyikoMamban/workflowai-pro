@@ -8,13 +8,9 @@ import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
 import {
   Plus, Send, Pin, Trash2, Pencil, Sparkles, Loader2, Search,
-} from "lucide-react";
-import { BrandMark } from "@/components/brand-logo";
-const __brand = { BrandMark };
-void __brand;
-const __unused = {
   Mic, Paperclip, MessageSquare,
 } from "lucide-react";
+import { BrandMark } from "@/components/brand-logo";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
