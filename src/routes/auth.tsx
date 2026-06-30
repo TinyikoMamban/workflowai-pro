@@ -1,7 +1,8 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Sparkles, Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
+import { Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
+import { BrandMark } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -92,8 +93,8 @@ function AuthPage() {
       <div className="relative hidden overflow-hidden bg-gradient-primary p-12 text-white lg:flex lg:flex-col lg:justify-between">
         <div className="absolute inset-0 opacity-40 bg-gradient-hero" />
         <Link to="/" className="relative flex items-center gap-2">
-          <div className="grid size-9 place-items-center rounded-xl bg-white/20 backdrop-blur">
-            <Sparkles className="size-5" />
+          <div className="grid size-10 place-items-center rounded-xl bg-white/15 p-1 backdrop-blur">
+            <BrandMark className="size-8" />
           </div>
           <span className="text-lg font-bold">WorkFlow AI Pro</span>
         </Link>
@@ -123,9 +124,7 @@ function AuthPage() {
         <Card className="w-full max-w-md border-border/60 bg-gradient-card p-8 shadow-elegant">
           <div className="mb-6 lg:hidden">
             <Link to="/" className="flex items-center gap-2">
-              <div className="grid size-9 place-items-center rounded-xl bg-gradient-primary">
-                <Sparkles className="size-5 text-white" />
-              </div>
+              <BrandMark className="size-9" />
               <span className="font-bold">WorkFlow AI Pro</span>
             </Link>
           </div>

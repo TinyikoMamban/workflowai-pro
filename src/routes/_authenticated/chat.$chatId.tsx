@@ -10,6 +10,7 @@ import {
   Plus, Send, Pin, Trash2, Pencil, Sparkles, Loader2, Search,
   Mic, Paperclip, MessageSquare,
 } from "lucide-react";
+import { BrandMark } from "@/components/brand-logo";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -222,9 +223,7 @@ function ChatPage() {
           <div className="mx-auto max-w-3xl space-y-6 p-6">
             {messages.length === 0 && (
               <div className="py-12 text-center">
-                <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-gradient-primary shadow-elegant">
-                  <Sparkles className="size-7 text-white" />
-                </div>
+                <BrandMark className="mx-auto size-14" />
                 <h3 className="mt-4 text-xl font-semibold">How can I help you today?</h3>
                 <p className="mt-1 text-sm text-muted-foreground">Try one of these to get started:</p>
                 <div className="mt-6 grid gap-2 sm:grid-cols-2">
