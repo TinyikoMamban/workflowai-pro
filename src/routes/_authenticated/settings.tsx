@@ -23,16 +23,20 @@ function SettingsPage() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase.from("profiles").select("full_name").maybeSingle();
-      setName(data?.full_name ?? "");
+      const { data } = await supabase.from("profiles").select("display_name").maybeSingle();
+      setName(data?.display_name ?? "");
       const { data: s } = await supabase.from("user_settings").select("*").maybeSingle();
-      if (s) { setNotif(!!s.notifications_enabled); setLang(s.language ?? "en"); }
+      if (s) {
+        const prefs = (s.preferences ?? {}) as { notifications?: boolean };
+        setNotif(prefs.notifications !== false);
+        setLang(s.language ?? "en");
+      }
     })();
   }, []);
 
   const save = async () => {
-    await supabase.from("profiles").update({ full_name: name }).eq("id", user!.id);
-    await supabase.from("user_settings").upsert({ user_id: user!.id, notifications_enabled: notif, language: lang });
+    await supabase.from("profiles").update({ display_name: name }).eq("id", user!.id);
+    await supabase.from("user_settings").upsert({ user_id: user!.id, language: lang, preferences: { notifications: notif } });
     toast.success("Settings saved");
   };
 

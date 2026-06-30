@@ -64,8 +64,8 @@ function ResearchPage() {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         await supabase.from("research_sessions").insert({
-          user_id: user.id, topic: topic || "Untitled", input_text: text,
-          summary: r.summary, key_findings: r.findings, insights: r.insights,
+          user_id: user.id, topic: topic || "Untitled", source_text: text,
+          summary: r.summary, findings: r.findings, insights: r.insights,
           recommendations: r.recommendations, swot: r.swot, confidence: r.confidence,
         });
         await supabase.from("analytics_events").insert({ user_id: user.id, event_type: "research_run" });
