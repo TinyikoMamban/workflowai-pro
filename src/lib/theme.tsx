@@ -5,8 +5,8 @@ type ThemeCtx = { theme: Theme; setTheme: (t: Theme) => void; resolved: "light" 
 const Ctx = createContext<ThemeCtx | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system");
-  const [resolved, setResolved] = useState<"light" | "dark">("light");
+  const [theme, setThemeState] = useState<Theme>("dark");
+  const [resolved, setResolved] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
     const stored = (typeof localStorage !== "undefined" && localStorage.getItem("theme")) as Theme | null;
@@ -19,7 +19,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const apply = () => {
       const isDark =
         theme === "dark" ||
-        (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        (theme === "system" && typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches) ||
+        (theme !== "light");
       root.classList.toggle("dark", isDark);
       setResolved(isDark ? "dark" : "light");
     };
