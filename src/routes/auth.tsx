@@ -72,16 +72,16 @@ function AuthPage() {
     }
   };
 
-  const handleGoogle = async () => {
+  const handleOAuth = async (provider: "google" | "apple") => {
     setBusy(true);
     try {
-      const result = await lovable.auth.signInWithOAuth("google", {
+      const result = await lovable.auth.signInWithOAuth(provider, {
         redirect_uri: window.location.origin,
       });
       if (result.error) throw result.error;
       if (!result.redirected) nav({ to: "/dashboard" });
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Google sign-in failed");
+      toast.error(err instanceof Error ? err.message : `${provider} sign-in failed`);
       setBusy(false);
     }
   };
@@ -223,8 +223,14 @@ function AuthPage() {
                 <div className="h-px flex-1 bg-border" /> OR <div className="h-px flex-1 bg-border" />
               </div>
               <div className="grid gap-2">
-                <Button variant="outline" onClick={handleGoogle} disabled={busy}>
+                <Button variant="outline" onClick={() => handleOAuth("google")} disabled={busy}>
                   <GoogleIcon /> Continue with Google
+                </Button>
+                <Button variant="outline" onClick={() => handleOAuth("apple")} disabled={busy}>
+                  <AppleIcon /> Continue with Apple
+                </Button>
+                <Button variant="outline" disabled title="Coming soon">
+                  <MicrosoftIcon /> Continue with Microsoft
                 </Button>
                 <Button variant="outline" disabled title="Coming soon">
                   <MicrosoftIcon /> Continue with Microsoft
@@ -262,6 +268,13 @@ function MicrosoftIcon() {
       <path fill="#7FBA00" d="M13 1h10v10H13z" />
       <path fill="#00A4EF" d="M1 13h10v10H1z" />
       <path fill="#FFB900" d="M13 13h10v10H13z" />
+    </svg>
+  );
+}
+function AppleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="size-4" fill="currentColor">
+      <path d="M16.365 1.43c0 1.14-.46 2.23-1.22 3.02-.81.85-2.12 1.5-3.21 1.41-.13-1.11.42-2.27 1.15-3.04.81-.85 2.21-1.49 3.28-1.39zM20.5 17.27c-.57 1.32-.84 1.91-1.57 3.08-1.02 1.63-2.46 3.66-4.24 3.68-1.58.02-2-1.03-4.14-1.02-2.14.01-2.6 1.04-4.19 1.02-1.78-.02-3.14-1.85-4.16-3.48-2.85-4.57-3.15-9.93-1.39-12.78 1.25-2.02 3.22-3.21 5.07-3.21 1.89 0 3.07 1.03 4.63 1.03 1.51 0 2.43-1.03 4.61-1.03 1.65 0 3.4.9 4.65 2.45-4.09 2.24-3.43 8.08.73 10.26z" />
     </svg>
   );
 }
