@@ -223,8 +223,14 @@ function AuthPage() {
                 <div className="h-px flex-1 bg-border" /> OR <div className="h-px flex-1 bg-border" />
               </div>
               <div className="grid gap-2">
-                <Button variant="outline" onClick={handleGoogle} disabled={busy}>
+                <Button variant="outline" onClick={() => handleOAuth("google")} disabled={busy}>
                   <GoogleIcon /> Continue with Google
+                </Button>
+                <Button variant="outline" onClick={() => handleOAuth("apple")} disabled={busy}>
+                  <AppleIcon /> Continue with Apple
+                </Button>
+                <Button variant="outline" disabled title="Coming soon">
+                  <MicrosoftIcon /> Continue with Microsoft
                 </Button>
                 <Button variant="outline" disabled title="Coming soon">
                   <MicrosoftIcon /> Continue with Microsoft
