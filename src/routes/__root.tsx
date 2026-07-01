@@ -68,16 +68,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "WorkFlow AI Pro — Intelligent Workplace Productivity Assistant" },
+      { title: "WorkFlow AI Pro | AI Workplace Productivity Assistant" },
       {
         name: "description",
         content:
           "WorkFlow AI Pro automates emails, meetings, tasks, and research with responsible AI for modern professionals.",
       },
-      { property: "og:title", content: "WorkFlow AI Pro" },
-      { property: "og:description", content: "Your intelligent workplace productivity assistant." },
+      { property: "og:title", content: "WorkFlow AI Pro | AI Workplace Productivity Assistant" },
+      { property: "og:description", content: "An AI-powered workplace productivity platform that generates professional emails, summarizes meetings, assists with research, plans tasks, and improves daily pr" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "WorkFlow AI Pro | AI Workplace Productivity Assistant" },
+      { name: "description", content: "An AI-powered workplace productivity platform that generates professional emails, summarizes meetings, assists with research, plans tasks, and improves daily pr" },
+      { name: "twitter:description", content: "An AI-powered workplace productivity platform that generates professional emails, summarizes meetings, assists with research, plans tasks, and improves daily pr" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1050f625-caee-4654-ae12-9ed12c08de54/id-preview-b235ea0f--7235c521-e134-4882-8257-ed4fad2032f1.lovable.app-1782877829588.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1050f625-caee-4654-ae12-9ed12c08de54/id-preview-b235ea0f--7235c521-e134-4882-8257-ed4fad2032f1.lovable.app-1782877829588.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
