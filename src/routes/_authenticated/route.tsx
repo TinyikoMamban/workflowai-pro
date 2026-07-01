@@ -32,41 +32,43 @@ function Layout() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border/50 bg-background/70 px-4 backdrop-blur-xl">
-          <SidebarTrigger />
-          <div className="hidden text-sm capitalize text-muted-foreground md:block">
-            {segments[0] === "_authenticated" ? "Workspace" : "Workspace"} / <span className="text-foreground">{title}</span>
+        <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border/60 bg-background/70 px-4 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+          <SidebarTrigger className="-ml-1" />
+          <div className="hidden text-sm text-muted-foreground md:flex md:items-center md:gap-1.5">
+            <span>Workspace</span>
+            <span className="opacity-40">/</span>
+            <span className="font-medium capitalize text-foreground">{title}</span>
           </div>
-          <div className="ml-auto flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="size-8">
+          <div className="ml-auto flex items-center gap-1.5">
+            <Button variant="ghost" size="icon" className="size-8 rounded-lg">
               <Search className="size-4" />
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative size-8">
+                <Button variant="ghost" size="icon" className="relative size-8 rounded-lg">
                   <Bell className="size-4" />
-                  <span className="absolute right-1.5 top-1.5 size-1.5 rounded-full bg-primary" />
+                  <span className="absolute right-1.5 top-1.5 size-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--primary)]" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-72">
                 <DropdownMenuLabel>Notifications</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="flex-col items-start">
+                <DropdownMenuItem className="flex-col items-start gap-0.5">
                   <span className="font-medium">Welcome to WorkFlow AI Pro</span>
                   <span className="text-xs text-muted-foreground">Try the AI chat to get started.</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="flex-col items-start">
+                <DropdownMenuItem className="flex-col items-start gap-0.5">
                   <span className="font-medium">Tip: Press Ctrl+K</span>
                   <span className="text-xs text-muted-foreground">Open the command palette anywhere.</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <Link to="/settings">
-              <Button variant="ghost" size="sm">Profile</Button>
+              <Button variant="ghost" size="sm" className="rounded-lg">Profile</Button>
             </Link>
           </div>
         </header>
-        <main className="min-h-[calc(100vh-3.5rem)] bg-gradient-hero/30">
+        <main className="min-h-[calc(100vh-3.5rem)] bg-gradient-hero/30 animate-fade-in">
           <Outlet />
         </main>
       </SidebarInset>
