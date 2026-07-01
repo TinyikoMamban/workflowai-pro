@@ -36,10 +36,21 @@ function PromptsPage() {
     },
   });
 
-  const filtered = useMemo(() => (templates ?? []).filter((t) =>
-    (cat === "All" || t.category === cat) &&
-    (q === "" || t.title.toLowerCase().includes(q.toLowerCase()) || t.prompt.toLowerCase().includes(q.toLowerCase()))
-  ), [templates, q, cat]);
+  const filtered = useMemo(() => {
+    const needle = q.trim().toLowerCase();
+    return (templates ?? []).filter((t) => {
+      if (cat !== "All" && t.category !== cat) return false;
+      if (!needle) return true;
+      const hay = [
+        t.title,
+        t.category,
+        t.description ?? "",
+        t.prompt,
+        (t.tags ?? []).join(" "),
+      ].join(" ").toLowerCase();
+      return hay.includes(needle);
+    });
+  }, [templates, q, cat]);
 
   const toggleFav = async (id: string) => {
     const { data: { user } } = await supabase.auth.getUser();
@@ -57,7 +68,7 @@ function PromptsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Prompt Library</h1>
-          <p className="text-sm text-muted-foreground">Professional templates for every workplace task.</p>
+          <p className="text-sm text-muted-foreground">{templates?.length ?? 0} professional templates across {CATS.length - 1} categories.</p>
         </div>
         <div className="grid size-12 place-items-center rounded-2xl bg-gradient-primary text-white shadow-elegant">
           <BookOpenText className="size-6" />
@@ -89,9 +100,31 @@ function PromptsPage() {
               </button>
             </div>
             <h3 className="mt-2 font-semibold">{t.title}</h3>
-            <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{t.description}</p>
+            {(() => {
+              const desc = t.description ?? "";
+              const idx = desc.toLowerCase().indexOf("use case:");
+              const short = idx >= 0 ? desc.slice(0, idx).trim() : desc;
+              const useCase = idx >= 0 ? desc.slice(idx + "use case:".length).trim() : "";
+              return (
+                <>
+                  {short && <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{short}</p>}
+                  {useCase && (
+                    <p className="mt-2 text-[11px] text-muted-foreground">
+                      <span className="font-semibold text-foreground/80">Use case: </span>{useCase}
+                    </p>
+                  )}
+                </>
+              );
+            })()}
             <pre className="mt-3 line-clamp-4 whitespace-pre-wrap rounded-md bg-muted/40 p-2 text-[11px] text-muted-foreground">{t.prompt}</pre>
-            <Button size="sm" variant="outline" className="mt-3" onClick={() => { navigator.clipboard.writeText(t.prompt); toast.success("Copied"); }}>
+            {t.tags && t.tags.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-1">
+                {t.tags.slice(0, 4).map((tag) => (
+                  <span key={tag} className="rounded-full bg-muted/60 px-2 py-0.5 text-[10px] text-muted-foreground">{tag}</span>
+                ))}
+              </div>
+            )}
+            <Button size="sm" variant="outline" className="mt-3" onClick={() => { navigator.clipboard.writeText(t.prompt); toast.success("Prompt copied to clipboard"); }}>
               <Copy className="size-3.5" /> Copy prompt
             </Button>
           </Card>
