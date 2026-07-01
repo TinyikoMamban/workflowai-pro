@@ -100,9 +100,31 @@ function PromptsPage() {
               </button>
             </div>
             <h3 className="mt-2 font-semibold">{t.title}</h3>
-            <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{t.description}</p>
+            {(() => {
+              const desc = t.description ?? "";
+              const idx = desc.toLowerCase().indexOf("use case:");
+              const short = idx >= 0 ? desc.slice(0, idx).trim() : desc;
+              const useCase = idx >= 0 ? desc.slice(idx + "use case:".length).trim() : "";
+              return (
+                <>
+                  {short && <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{short}</p>}
+                  {useCase && (
+                    <p className="mt-2 text-[11px] text-muted-foreground">
+                      <span className="font-semibold text-foreground/80">Use case: </span>{useCase}
+                    </p>
+                  )}
+                </>
+              );
+            })()}
             <pre className="mt-3 line-clamp-4 whitespace-pre-wrap rounded-md bg-muted/40 p-2 text-[11px] text-muted-foreground">{t.prompt}</pre>
-            <Button size="sm" variant="outline" className="mt-3" onClick={() => { navigator.clipboard.writeText(t.prompt); toast.success("Copied"); }}>
+            {t.tags && t.tags.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-1">
+                {t.tags.slice(0, 4).map((tag) => (
+                  <span key={tag} className="rounded-full bg-muted/60 px-2 py-0.5 text-[10px] text-muted-foreground">{tag}</span>
+                ))}
+              </div>
+            )}
+            <Button size="sm" variant="outline" className="mt-3" onClick={() => { navigator.clipboard.writeText(t.prompt); toast.success("Prompt copied to clipboard"); }}>
               <Copy className="size-3.5" /> Copy prompt
             </Button>
           </Card>
