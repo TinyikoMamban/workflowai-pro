@@ -36,10 +36,21 @@ function PromptsPage() {
     },
   });
 
-  const filtered = useMemo(() => (templates ?? []).filter((t) =>
-    (cat === "All" || t.category === cat) &&
-    (q === "" || t.title.toLowerCase().includes(q.toLowerCase()) || t.prompt.toLowerCase().includes(q.toLowerCase()))
-  ), [templates, q, cat]);
+  const filtered = useMemo(() => {
+    const needle = q.trim().toLowerCase();
+    return (templates ?? []).filter((t) => {
+      if (cat !== "All" && t.category !== cat) return false;
+      if (!needle) return true;
+      const hay = [
+        t.title,
+        t.category,
+        t.description ?? "",
+        t.prompt,
+        (t.tags ?? []).join(" "),
+      ].join(" ").toLowerCase();
+      return hay.includes(needle);
+    });
+  }, [templates, q, cat]);
 
   const toggleFav = async (id: string) => {
     const { data: { user } } = await supabase.auth.getUser();
