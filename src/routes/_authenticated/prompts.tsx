@@ -68,7 +68,7 @@ function PromptsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Prompt Library</h1>
-          <p className="text-sm text-muted-foreground">Professional templates for every workplace task.</p>
+          <p className="text-sm text-muted-foreground">{templates?.length ?? 0} professional templates across {CATS.length - 1} categories.</p>
         </div>
         <div className="grid size-12 place-items-center rounded-2xl bg-gradient-primary text-white shadow-elegant">
           <BookOpenText className="size-6" />
