@@ -256,20 +256,9 @@ supabase/
 README.md
 ```
 
----
 
-# Screenshots
 
-Suggested screenshots to include:
 
-- Landing Page
-- Dashboard
-- AI Chat
-- Email Generator
-- Meeting Notes
-- Task Planner
-- Prompt Library
-- Analytics Dashboard
 
 ---
 
